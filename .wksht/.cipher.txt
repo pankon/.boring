@@ -1,0 +1,45 @@
+Encryption Worksheet (self-plan)
+
+Read:
+https://en.wikipedia.org/wiki/Block_cipher
+
+Keywords:
+Iterated block ciphers
+permutation box
+iv
+s-box
+substitution cipher
+Nothing-up-my-sleeve number
+Boolean function
+Substitution-permutation networks
+Feistel cipher
+Lai-Massey cipher (scheme)
+ARX (add-rotate-xor)
+Salsa20
+Speck
+XXTEA
+BLAKE
+data flow diagram
+DES
+chosen plaintext attack
+exhaustive search
+AES
+Electronic Codebook
+Cipher block chaining
+Propagating Cipher Block Chaining
+Cipher Feedback
+Output Feedback
+Counter (CTR)
+
+Uncategoraized (future):
+Differential cryptanalysis
+Linear cryptanalysis
+rotational cryptanalysis
+Boolean algebra, diffeq
+Read-once function
+Truth function
+Decision tree model
+3-ary Boolean functions
+directed acyclic graphs
+binary decision diagrams
+propositional directed acyclic graphs
