@@ -12,6 +12,8 @@ namespace boring
 {
     public class Cipher
     {
+        static private string viewer = "gedit";
+    
         static byte[] MakeKey(string[] args)
         {
             byte[] key = new byte[args.Length - 2];
@@ -51,7 +53,7 @@ namespace boring
                 */
             }
             
-            ICipher cipher = new RailFence();
+            ICipher cipher = CipherFactory.Make("RailFence");
             byte[] ciphertext = cipher.encrypt(data, key);
             
             using (FileStream fs = File.Create(args[1]))
@@ -59,8 +61,15 @@ namespace boring
                 fs.Write(ciphertext, 0, ciphertext.Length);
             }
             
-            Utils.Spawn("ghex " + args[0] + "&>/dev/null", true);
-            Utils.Spawn("ghex " + args[1] + "&>/dev/null", true);
+            byte[] generated_plaintext = cipher.decrypt(ciphertext, key);
+            
+            using (FileStream fs = File.Create(args[1] + "_decrypt"))
+            {
+                fs.Write(generated_plaintext, 0, ciphertext.Length);
+            }
+            
+            Utils.Spawn(viewer + " " + args[0] + "&>/dev/null", true);
+            Utils.Spawn(viewer + " " + args[1] + "_decrypt" + "&>/dev/null", true);
         }
     }
 }
