@@ -43,14 +43,6 @@ namespace boring
             {
                 data = new byte[fs.Length];
                 fs.Read(data, 0, (int)fs.Length);
-                
-                /*
-                foreach (byte b in (new RailFence()).encrypt(data, key))
-                {
-                    Console.Write((char)b);
-                }
-                Console.WriteLine("");
-                */
             }
             
             ICipher cipher = CipherFactory.Make("RailFence");
@@ -69,7 +61,8 @@ namespace boring
             }
             
             Utils.Spawn(viewer + " " + args[0] + "&>/dev/null", true);
-            Utils.Spawn(viewer + " " + args[1] + "_decrypt" + "&>/dev/null", true);
+            Utils.Spawn(viewer + " " + args[1] + "_decrypt" + "&>/dev/null",
+                        true);
         }
     }
 }

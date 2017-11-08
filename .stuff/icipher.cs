@@ -5,6 +5,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace boring
@@ -14,26 +15,27 @@ namespace boring
         byte[] encrypt(byte[] plaintext, byte[] key);
         byte[] decrypt(byte[] ciphertext, byte[] key);
         
+        ICipher Make();
+        
         // some guessing interface?
     } 
     
     public class CipherFactory
     {
+        static private Dictionary<string, ICipher>dict = new Dictionary<string, ICipher>();
+        
+        static CipherFactory()
+        {
+            dict.Add("RailFence", (new RailFence()));
+        }
+        
         private CipherFactory() {}
-        private static Assembly asm = (new CipherFactory()).GetType().Assembly;
     
         public static ICipher Make(string classname)
         {
             
-            //Type t = asm.GetType(classname);
-            ICipher ret = null;
-            //Activator.CreateInstance(classname);//ct) as ICipher;
+            ICipher ret = dict[classname].Make();
             
-            if (null == ret)
-            {
-                return new RailFence();//throw new Exception("No cipher created: " + classname);
-            }
-
             return ret;
         }
     }   

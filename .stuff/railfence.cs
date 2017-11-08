@@ -10,6 +10,11 @@ namespace boring
 {
     public class RailFence : ICipher
     {
+        public ICipher Make()
+        {
+            return new RailFence();
+        }
+    
         public byte[] encrypt(byte[] plaintext, byte[] key)
         {
             if (1 != key.Length)
