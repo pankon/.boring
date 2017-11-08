@@ -28,8 +28,9 @@ namespace boring
         {
             if (3 > args.Length)
             {
-                Console.WriteLine(@"Usage: ./{0}.exe filename output_file [cipher params]",
-                                  Process.GetCurrentProcess().ProcessName);
+                Console.WriteLine(
+                    @"Usage: ./{0}.exe filename output_file [cipher params]",
+                    Process.GetCurrentProcess().ProcessName);
                 return;
             }
             
