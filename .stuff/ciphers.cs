@@ -45,7 +45,7 @@ namespace boring
                 fs.Read(data, 0, (int)fs.Length);
             }
             
-            ICipher cipher = CipherFactory.Make("RailFence");
+            ICipher cipher = CipherFactory.Make("AtBash");
             byte[] ciphertext = cipher.encrypt(data, key);
             
             using (FileStream fs = File.Create(args[1]))

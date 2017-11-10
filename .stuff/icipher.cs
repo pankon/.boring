@@ -27,6 +27,7 @@ namespace boring
         static CipherFactory()
         {
             dict.Add("RailFence", (new RailFence()));
+            dict.Add("AtBash", (new AtBash()));
         }
         
         private CipherFactory() {}
