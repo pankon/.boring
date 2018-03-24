@@ -2,6 +2,7 @@
 By Nathan
 """
 
+from bit import Key, base58
 
 class Lego(object):
     
@@ -154,34 +155,61 @@ class Lego(object):
                     h = hex(value)
                     hex_value += h[2:]
                 else:
-                    print "Invalid value!", key
+                    print("Invalid value!", key)
                     hex_value += hex(0xffffff)[2:]
         return hex_value
-       
-width = 12 * 4
-height = 2.5
-bytes_per_block = 3
+  
+def check_bitcoin_key(key):
+    bit_key = Key(key)
+    return bit_key.get_balance('usd')
+  
+if __name__ == "__main__":     
+    width = 12 * 4
+    height = 5
+    bytes_per_block = 1
 
-key_len = width * height * bytes_per_block
-print "key length:", key_len
+    key_len = 256 #width * height * bytes_per_block
+    print("key length:", key_len)
 
-key_segments = [
-    "mbl cye msg bre",
-    "mbl lgr mbl cye",
-    "mbl lgr mbl lgr",
-    "mbl cye mbl bre",
-    "mbl lgr msg cye",
-    "mbl cye cye cye",
-    "mbl lgr mbl cye",
-    "mbl cye mbl lgr",
-    "mbl cye dgr cye",
-    "mbl lgr msg cye",
-    "mbl msg bre msg",
-    "mbl msg bre bre",
-    
-    
-]
+    key_segments = [
+        "mbl cye msg bre",
+        "mbl lgr mbl cye",
+        "mbl lgr mbl lgr",
+        "mbl cye mbl bre",
+        "mbl lgr msg cye",
+        "mbl cye cye cye",
+        "mbl lgr mbl cye",
+        "mbl cye mbl lgr",
+        "mbl cye dgr cye",
+        "mbl lgr msg cye",
+        "mbl msg bre msg",
+        "mbl msg bre bre",
+        "mbl msg dgr bre",
+        "mbl lgr mbl dgr",
+        "mbl lgr mbl cye",
+        "mbl cye dgr lgr",
+        "mbl lgr mbl msg",
+        "mbl cye cye mbl",
+        "mbl lgr cye cye",
+        "mbl msg bre lgr",
+        "mbl cye cye dgr",
+        "mbl cye dgr bre",
+        "mbl lgr mbl dgr",
+        "mbl msg cye dgr", 
+        "mbl cye bre bre",
+        "mbl msg bre cye",
+        "mbl msg cye dgr",
+        "mbl msg bre bre",
+        "mbl lgr msg msg", # key should end here   
+    ]
 
-key = Lego.key_to_hex(' '.join(key_segments))
-print key
-print "actual length:", len(key) / 2
+    key = Lego.key_to_hex(' '.join(' '.join(key_seg.split(' ')[1:]) for key_seg in key_segments))
+
+    for potential_public_key_idx in range(0, len(key), 64):
+        pot_key = key[potential_public_key_idx:potential_public_key_idx + 64]
+        b58_pot_key = base58.b58encode(pot_key.encode('ascii'))
+        print(pot_key)
+        print(b58_pot_key)
+        # check_bitcoin_key(b58_pot_key)
+
+    print("actual length:", len(key) / 2)
