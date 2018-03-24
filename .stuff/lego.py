@@ -1,5 +1,5 @@
 """
-By Nathan
+By Nathan (python3)
 """
 
 from bit import Key, base58
