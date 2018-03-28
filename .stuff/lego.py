@@ -152,7 +152,7 @@ class Lego(object):
             if key:
                 value = cls.lego_to_hex(key)
                 if value:
-                    hex_value += "%6x" % value
+                    hex_value += "%06x" % value
                 else:
                     print("Invalid value!", key)
                     hex_value += hex(0xffffff)[2:]
